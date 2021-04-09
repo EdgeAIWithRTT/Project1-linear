@@ -1,0 +1,94 @@
+Neural Network Tools for STM32 v1.3.0 (AI tools v5.1.1)
+Created date       : 2020-07-03 13:57:15
+Parameters         : generate --name network -m /home/lebhoryi/RT-Thread/Edge_AI/Project1/model/keras_model.h5 --type keras --compression 1 --verbosity 1 --workspace /tmp/mxAI_workspace2764271019136717009621471351245096 --output /home/lebhoryi/.stm32cubemx/stm32ai_output
+
+Exec/report summary (generate dur=0.29s err=0)
+------------------------------------------------------------------------------------------------------------------------
+model file         : /home/lebhoryi/RT-Thread/Edge_AI/Project1/model/keras_model.h5
+type               : keras (keras_dump) - tf.keras 2.2.4-tf
+c_name             : network
+compression        : None
+quantize           : None
+workspace dir      : /tmp/mxAI_workspace2764271019136717009621471351245096
+output dir         : /home/lebhoryi/.stm32cubemx/stm32ai_output
+
+model_name         : keras_model
+model_hash         : dae97dc1773c31e8b7500d204c3e3d05
+input              : input_0 [1 items, 4 B, ai_float, FLOAT32, (1,)]
+inputs (total)     : 4 B
+output             : dense_1 [1 items, 4 B, ai_float, FLOAT32, (1,)]
+outputs (total)    : 4 B
+params #           : 16 items (64 B)
+macc               : 10
+weights (ro)       : 64 B (64 B) 
+activations (rw)   : 20 B (20 B) 
+ram (total)        : 28 B (28 B) = 20 + 4 + 4
+
+------------------------------------------------------------------------------------------------------------------------
+id  layer (type)    output shape      param #     connected to             macc           rom                
+------------------------------------------------------------------------------------------------------------------------
+0   input_0 (Input) (1,)                                                                                     
+    dense (Dense)   (5,)              10          input_0                  5              40                 
+------------------------------------------------------------------------------------------------------------------------
+1   dense_1 (Dense) (1,)              6           dense                    5              24                 
+------------------------------------------------------------------------------------------------------------------------
+keras_model p=16(64 Bytes) macc=10 rom=64 Bytes ram=20 B io_ram=8 B
+
+
+
+Generated C-graph summary
+------------------------------------------------------------------------------------------------------------------------
+model name         : keras_model
+c-name             : network
+c-node #           : 2
+c-array #          : 7
+activations size   : 20
+weights size       : 64
+macc               : 10
+inputs             : ['input_0_output_array']
+outputs            : ['dense_1_output_array']
+
+
+C-Arrays (7)
+------------------------------------------------------------------------------------------------------------------------
+c_id  name (*_array)   item/size           mem-pool     c-type       fmt    comment            
+------------------------------------------------------------------------------------------------------------------------
+0     dense_1_bias     1/4                 weights      const float  float                     
+1     dense_1_weights  5/20                weights      const float  float                     
+2     dense_bias       5/20                weights      const float  float                     
+3     dense_weights    5/20                weights      const float  float                     
+4     input_0_output   1/4                 user         float        float  /input             
+5     dense_output     5/20                activations  float        float                     
+6     dense_1_output   1/4                 user         float        float  /output            
+------------------------------------------------------------------------------------------------------------------------
+
+
+C-Layers (2)
+------------------------------------------------------------------------------------------------------------------------
+c_id  name (*_layer)  id  type   macc        rom         tensors             shape (array id)                       
+------------------------------------------------------------------------------------------------------------------------
+0     dense           0   dense  5           40          I: input_0_output   [1, 1, 1, 1] (4)                       
+                                                         W: dense_weights                                           
+                                                         W: dense_bias                                              
+                                                         O: dense_output     [1, 1, 1, 5] (5)                       
+------------------------------------------------------------------------------------------------------------------------
+1     dense_1         1   dense  5           24          I: dense_output     [1, 1, 1, 5] (5)                       
+                                                         W: dense_1_weights                                         
+                                                         W: dense_1_bias                                            
+                                                         O: dense_1_output   [1, 1, 1, 1] (6)                       
+------------------------------------------------------------------------------------------------------------------------
+
+
+ 
+Complexity per-layer - macc=10 rom=64
+------------------------------------------------------------------------------------------------------------------------
+id      layer (type)    macc                                    rom                                    
+------------------------------------------------------------------------------------------------------------------------
+0       dense (Dense)   |||||||||||||||||||||||||||||||  50.0%  |||||||||||||||||||||||||||||||  62.5% 
+1       dense_1 (Dense) |||||||||||||||||||||||||||||||  50.0%  |||||||||||||||||||              37.5% 
+------------------------------------------------------------------------------------------------------------------------
+
+
+Evaluation report (summary)
+------------------------------------------------------------
+NOT EVALUATED
